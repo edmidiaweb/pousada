@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pousada Encanto - Oficial</title>
+    
+    <meta name="description" content="Pousada Encanto: O seu refúgio de paz. Reserve agora via WhatsApp.">
+    <meta property="og:title" content="Pousada Encanto - Reserva Online">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=600">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a5f7a">
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -27,8 +34,7 @@
             <i class="fas fa-history fa-3x"></i>
             <h2>Nossa História</h2>
             <div class="text-container">
-                <p>Fundada em 2010, a <b>Pousada Encanto</b> nasceu do sonho de oferecer um refúgio onde o conforto encontra a natureza.</p>
-                <p>Referência em hospitalidade, oferecemos uma experiência única de paz e renovação.</p>
+                <p>Desde 2010, a <b>Pousada Encanto</b> foca em hospitalidade humanizada e contato com a natureza.</p>
             </div>
             <div class="button-group">
                 <button class="btn-reservar-small" onclick="abrirReserva(event)">RESERVAR AGORA</button>
@@ -38,16 +44,32 @@
     </section>
 
     <section id="galeria-page" class="view-section overlay-page hidden">
-        <div class="content-card" onclick="event.stopPropagation()">
+        <div class="content-card galeria-card" onclick="event.stopPropagation()">
             <h2>Nossa Pousada</h2>
             <div class="carousel">
                 <div class="carousel-container" id="carousel-slides"></div>
                 <button class="prev" onclick="moveSlide(-1, event)">❮</button>
                 <button class="next" onclick="moveSlide(1, event)">❯</button>
             </div>
-            <p id="caption-text">Carregando...</p>
+            <p id="caption-text" class="skeleton-text">Carregando...</p>
             <div class="button-group">
                 <button class="btn-reservar-small" onclick="abrirReserva(event)">RESERVAR AGORA</button>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="checkin-page" class="view-section overlay-page hidden">
+        <div class="content-card" onclick="event.stopPropagation()">
+            <i class="fas fa-id-card fa-3x"></i>
+            <h2>Pré-Check-in</h2>
+            <div class="form-checkin">
+                <input type="text" id="checkin-cpf" placeholder="CPF">
+                <input type="text" id="checkin-rg" placeholder="RG">
+                <input type="text" id="checkin-endereco" placeholder="Endereço Completo">
+            </div>
+            <div class="button-group">
+                <button class="btn-reservar-small" onclick="finalizarCheckin()">ENVIAR AO WHATSAPP</button>
                 
             </div>
         </div>
@@ -78,7 +100,7 @@
         <button onclick="mostrarPagina('galeria-page')">
             <i class="fas fa-images"></i><span>Galeria</span>
         </button>
-        <button onclick="window.open('https://maps.google.com', '_blank')">
+        <button onclick="window.open('http://google.com/maps', '_blank')">
             <i class="fas fa-map-marker-alt"></i><span>Como Chegar</span>
         </button>
     </nav>

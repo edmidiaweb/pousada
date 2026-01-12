@@ -1,0 +1,15 @@
+{
+  "name": "Pousada Encanto",
+  "short_name": "Encanto",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#1a5f7a",
+  "theme_color": "#1a5f7a",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2983/2983803.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
