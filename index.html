@@ -1,731 +1,88 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pousada Mar Azul - Itanhaém</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #2c3e50;
-            line-height: 1.6;
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-
-        /* Hero Section com Carrossel */
-        .hero {
-            margin-top: 70px;
-            height: 600px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .carousel {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-
-        .carousel-slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-
-        .carousel-slide.active {
-            opacity: 1;
-        }
-
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .carousel-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero-content p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        .carousel-nav {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-
-        .carousel-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .carousel-dot.active {
-            background: white;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        /* Sections */
-        section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: #667eea;
-        }
-
-        /* Sobre */
-        .sobre-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .sobre-text {
-            font-size: 1.1rem;
-            color: #555;
-        }
-
-        .sobre-img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        /* Acomodações */
-        .quartos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .quarto-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .quarto-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .quarto-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .quarto-info {
-            padding: 1.5rem;
-        }
-
-        .quarto-info h3 {
-            color: #667eea;
-            margin-bottom: 0.5rem;
-        }
-
-        .preco {
-            font-size: 1.5rem;
-            color: #3498db;
-            font-weight: bold;
-            margin: 1rem 0;
-        }
-
-        .disponibilidade {
-            display: inline-block;
-            padding: 5px 15px;
-            background: #2ecc71;
-            color: white;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .indisponivel {
-            background: #e74c3c;
-        }
-
-        /* Reserva */
-        .reserva-form {
-            max-width: 600px;
-            margin: 2rem auto;
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #667eea;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #e0e0e0;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        /* Contato */
-        .contato-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .contato-item {
-            text-align: center;
-            padding: 2rem;
-            background: #f8f9fa;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-
-        .contato-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .contato-item i {
-            font-size: 3rem;
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-
-        /* Botões Flutuantes */
-        .floating-btns {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 999;
-        }
-
-        .float-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            cursor: pointer;
-            transition: transform 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            text-decoration: none;
-        }
-
-        .float-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .whatsapp {
-            background: #25D366;
-        }
-
-        .instagram {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-        }
-
-        /* Responsivo */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .hero-content p {
-                font-size: 1rem;
-            }
-
-            .sobre-content {
-                grid-template-columns: 1fr;
-            }
-
-            .floating-btns {
-                bottom: 20px;
-                right: 20px;
-            }
-
-            .float-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
-        }
-
-        .success-msg {
-            background: #2ecc71;
-            color: white;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-top: 1rem;
-            text-align: center;
-            display: none;
-        }
-    </style>
+    <title>Pousada Encanto - Oficial</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">🏖️ Pousada Mar Azul</div>
-            <ul class="nav-links">
-                <li><a href="#home">Início</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#quartos">Acomodações</a></li>
-                <li><a href="#reserva">Reservar</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
+<body onclick="fecharAoClicarFora(event)">
 
-    <section id="home" class="hero">
-        <div class="carousel">
-            <div class="carousel-slide active">
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&h=900&fit=crop&q=80" alt="Vista da Pousada">
+    <main id="home-page" class="view-section">
+        <div class="hero-content">
+            <div class="logo-area">
+                <i class="fas fa-umbrella-beach fa-4x"></i>
+                <h1>POUSADA ENCANTO</h1>
+                <p>O seu refúgio entre o mar e a serra</p>
             </div>
-            <div class="carousel-slide">
-                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1600&h=900&fit=crop&q=80" alt="Quarto Aconchegante">
-            </div>
-            <div class="carousel-slide">
-                <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1600&h=900&fit=crop&q=80" alt="Praia de Itanhaém">
-            </div>
-            <div class="carousel-slide">
-                <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1600&h=900&fit=crop&q=80" alt="Café da Manhã">
-            </div>
-            <div class="carousel-slide">
-                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1600&h=900&fit=crop&q=80" alt="Recepção da Pousada">
-            </div>
-            <div class="carousel-slide">
-                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1600&h=900&fit=crop&q=80" alt="Pôr do Sol na Praia">
-            </div>
-            <div class="carousel-slide">
-                <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=1600&h=900&fit=crop&q=80" alt="Área de Lazer">
-            </div>
-            <div class="carousel-slide">
-                <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1600&h=900&fit=crop&q=80" alt="Piscina">
-            </div>
+            <button class="btn-reservar-principal" onclick="abrirReserva(event)">
+                <i class="fab fa-whatsapp"></i> FAZER RESERVA AGORA
+            </button>
         </div>
-        <div class="carousel-overlay">
-            <div class="hero-content">
-                <h1>Pousada Mar Azul</h1>
-                <p>Seu refúgio a poucos metros da praia em Itanhaém</p>
-                <a href="#reserva" class="btn">Reserve Agora</a>
-            </div>
-        </div>
-        <div class="carousel-nav">
-            <span class="carousel-dot active" data-slide="0"></span>
-            <span class="carousel-dot" data-slide="1"></span>
-            <span class="carousel-dot" data-slide="2"></span>
-            <span class="carousel-dot" data-slide="3"></span>
-        </div>
-    </section>
+    </main>
 
-    <section id="sobre">
-        <h2>Sobre a Pousada</h2>
-        <div class="sobre-content">
-            <div>
-                <p class="sobre-text">
-                    A Pousada Mar Azul está localizada a apenas alguns metros da bela praia de Itanhaém, oferecendo aos nossos hóspedes uma experiência única de tranquilidade e conforto.
-                </p>
-                <p class="sobre-text">
-                    Com quartos aconchegantes, café da manhã incluso e uma equipe dedicada, garantimos que sua estadia seja inesquecível. Perfeito para casais, famílias e grupos de amigos que buscam relaxamento à beira-mar.
-                </p>
-                <p class="sobre-text">
-                    <strong>Comodidades:</strong> Wi-Fi gratuito, estacionamento, ar-condicionado, café da manhã incluso, área de lazer e acesso direto à praia.
-                </p>
+    <section id="quem-somos-page" class="view-section overlay-page hidden">
+        <div class="content-card" onclick="event.stopPropagation()">
+            <i class="fas fa-history fa-3x"></i>
+            <h2>Nossa História</h2>
+            <div class="text-container">
+                <p>Fundada em 2010, a <b>Pousada Encanto</b> nasceu do sonho de oferecer um refúgio onde o conforto encontra a natureza.</p>
+                <p>Referência em hospitalidade, oferecemos uma experiência única de paz e renovação.</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&h=400&fit=crop&q=80" alt="Interior da Pousada" class="sobre-img">
-        </div>
-    </section>
-
-    <section id="quartos">
-        <h2>Nossas Acomodações</h2>
-        <div class="quartos-grid">
-            <div class="quarto-card">
-                <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop&q=80" alt="Quarto Standard" class="quarto-img">
-                <div class="quarto-info">
-                    <h3>Quarto Standard</h3>
-                    <span class="disponibilidade">Disponível</span>
-                    <p>Quarto confortável com cama de casal, ar-condicionado, TV e Wi-Fi.</p>
-                    <p class="preco">R$ 180/noite</p>
-                    <a href="#reserva" class="btn">Reservar</a>
-                </div>
-            </div>
-
-            <div class="quarto-card">
-                <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=400&h=300&fit=crop&q=80" alt="Quarto Família" class="quarto-img">
-                <div class="quarto-info">
-                    <h3>Quarto Família</h3>
-                    <span class="disponibilidade">Disponível</span>
-                    <p>Espaçoso, com cama de casal e beliches, ideal para famílias.</p>
-                    <p class="preco">R$ 280/noite</p>
-                    <a href="#reserva" class="btn">Reservar</a>
-                </div>
-            </div>
-
-            <div class="quarto-card">
-                <img src="https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=400&h=300&fit=crop&q=80" alt="Suíte Master" class="quarto-img">
-                <div class="quarto-info">
-                    <h3>Suíte Master</h3>
-                    <span class="disponibilidade indisponivel">Esgotado</span>
-                    <p>Suíte luxuosa com vista para o mar, hidromassagem e varanda privativa.</p>
-                    <p class="preco">R$ 450/noite</p>
-                    <a href="#reserva" class="btn">Lista de Espera</a>
-                </div>
+            <div class="button-group">
+                <button class="btn-reservar-small" onclick="abrirReserva(event)">RESERVAR AGORA</button>
+                
             </div>
         </div>
     </section>
 
-    <section id="reserva">
-        <h2>Faça sua Reserva</h2>
-        <form class="reserva-form" id="reservaForm">
-            <div class="form-group">
-                <label for="nome">Nome Completo</label>
-                <input type="text" id="nome" name="nome" required>
+    <section id="galeria-page" class="view-section overlay-page hidden">
+        <div class="content-card" onclick="event.stopPropagation()">
+            <h2>Nossa Pousada</h2>
+            <div class="carousel">
+                <div class="carousel-container" id="carousel-slides"></div>
+                <button class="prev" onclick="moveSlide(-1, event)">❮</button>
+                <button class="next" onclick="moveSlide(1, event)">❯</button>
             </div>
-
-            <div class="form-group">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-
-            <div class="form-group">
-                <label for="telefone">Telefone</label>
-                <input type="tel" id="telefone" name="telefone" required>
-            </div>
-
-            <div class="form-group">
-                <label for="quarto">Tipo de Acomodação</label>
-                <select id="quarto" name="quarto" required>
-                    <option value="">Selecione...</option>
-                    <option value="standard">Quarto Standard - R$ 180/noite</option>
-                    <option value="familia">Quarto Família - R$ 280/noite</option>
-                    <option value="master">Suíte Master - R$ 450/noite</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="checkin">Check-in</label>
-                <input type="date" id="checkin" name="checkin" required>
-            </div>
-
-            <div class="form-group">
-                <label for="checkout">Check-out</label>
-                <input type="date" id="checkout" name="checkout" required>
-            </div>
-
-            <div class="form-group">
-                <label for="hospedes">Número de Hóspedes</label>
-                <input type="number" id="hospedes" name="hospedes" min="1" max="6" required>
-            </div>
-
-            <div class="form-group">
-                <label for="observacoes">Observações</label>
-                <textarea id="observacoes" name="observacoes" rows="4"></textarea>
-            </div>
-
-            <button type="submit" class="btn" style="width: 100%;">Solicitar Reserva</button>
-            <div class="success-msg" id="successMsg">
-                ✓ Solicitação enviada com sucesso! Entraremos em contato em breve.
-            </div>
-        </form>
-    </section>
-
-    <section id="contato">
-        <h2>Entre em Contato</h2>
-        <div class="contato-info">
-            <div class="contato-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <h3>Endereço</h3>
-                <p>Rua da Praia, 123<br>Itanhaém - SP</p>
-            </div>
-
-            <div class="contato-item">
-                <i class="fas fa-phone"></i>
-                <h3>Telefone</h3>
-                <p>(13) 3422-1234</p>
-                <p>(13) 99999-8888</p>
-            </div>
-
-            <div class="contato-item">
-                <i class="fas fa-envelope"></i>
-                <h3>E-mail</h3>
-                <p>contato@pousadamarazul.com.br</p>
-            </div>
-
-            <div class="contato-item">
-                <i class="fas fa-clock"></i>
-                <h3>Horário</h3>
-                <p>Check-in: 14h<br>Check-out: 12h</p>
+            <p id="caption-text">Carregando...</p>
+            <div class="button-group">
+                <button class="btn-reservar-small" onclick="abrirReserva(event)">RESERVAR AGORA</button>
+                
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Pousada Mar Azul - Itanhaém. Todos os direitos reservados.</p>
-        <p>Desenvolvido com ❤️ para proporcionar as melhores experiências</p>
-    </footer>
-
-    <!-- Botões Flutuantes -->
-    <div class="floating-btns">
-        <a href="https://wa.me/5513999998888?text=Olá! Gostaria de fazer uma reserva na Pousada Mar Azul" class="float-btn whatsapp" target="_blank" title="WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="https://instagram.com/pousadamarazul" class="float-btn instagram" target="_blank" title="Instagram">
-            <i class="fab fa-instagram"></i>
-        </a>
+    <div id="modal-chat" class="modal" onclick="fecharReservaAoClicarFora(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close" onclick="fecharReserva()">×</span>
+            <div id="chat-box">
+                <div class="msg bot">Olá! Vamos iniciar sua reserva? Qual o seu <b>nome completo</b>?</div>
+            </div>
+            <div id="input-area">
+                <input type="text" id="user-input" placeholder="Digite aqui...">
+                <button id="btn-enviar"><i class="fas fa-paper-plane"></i></button>
+            </div>
+            <div id="option-area" class="hidden"></div>
+        </div>
     </div>
 
-    <script>
-        // Carrossel de Imagens
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-slide');
-        const dots = document.querySelectorAll('.carousel-dot');
+    <a href="https://instagram.com" target="_blank" class="btn-float-instagram" onclick="event.stopPropagation()">
+        <i class="fab fa-instagram"></i>
+    </a>
 
-        function showSlide(n) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            currentSlide = n;
-            if (currentSlide >= slides.length) currentSlide = 0;
-            if (currentSlide < 0) currentSlide = slides.length - 1;
-            
-            slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
-        }
+    <nav class="bottom-nav" onclick="event.stopPropagation()">
+        <button onclick="mostrarPagina('quem-somos-page')">
+            <i class="fas fa-users"></i><span>Quem Somos</span>
+        </button>
+        <button onclick="mostrarPagina('galeria-page')">
+            <i class="fas fa-images"></i><span>Galeria</span>
+        </button>
+        <button onclick="window.open('https://maps.google.com', '_blank')">
+            <i class="fas fa-map-marker-alt"></i><span>Como Chegar</span>
+        </button>
+    </nav>
 
-        function nextSlide() {
-            showSlide(currentSlide + 1);
-        }
-
-        // Avançar automaticamente
-        setInterval(nextSlide, 5000);
-
-        // Navegação por dots
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => showSlide(index));
-        });
-
-        // Scroll suave
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Formulário de Reserva
-        document.getElementById('reservaForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nome = document.getElementById('nome').value;
-            const email = document.getElementById('email').value;
-            const telefone = document.getElementById('telefone').value;
-            const quarto = document.getElementById('quarto').options[document.getElementById('quarto').selectedIndex].text;
-            const checkin = document.getElementById('checkin').value;
-            const checkout = document.getElementById('checkout').value;
-            const hospedes = document.getElementById('hospedes').value;
-            const obs = document.getElementById('observacoes').value;
-            
-            // Formatando a mensagem para WhatsApp
-            const mensagem = `*Nova Reserva - Pousada Mar Azul*%0A%0A` +
-                           `*Nome:* ${nome}%0A` +
-                           `*Email:* ${email}%0A` +
-                           `*Telefone:* ${telefone}%0A` +
-                           `*Acomodação:* ${quarto}%0A` +
-                           `*Check-in:* ${checkin}%0A` +
-                           `*Check-out:* ${checkout}%0A` +
-                           `*Hóspedes:* ${hospedes}%0A` +
-                           `*Observações:* ${obs || 'Nenhuma'}`;
-            
-            // Mostrar mensagem de sucesso
-            const successMsg = document.getElementById('successMsg');
-            successMsg.style.display = 'block';
-            
-            // Redirecionar para WhatsApp após 2 segundos
-            setTimeout(() => {
-                window.open(`https://wa.me/5513999998888?text=${mensagem}`, '_blank');
-                this.reset();
-                successMsg.style.display = 'none';
-            }, 2000);
-        });
-
-        // Definir data mínima para check-in (hoje)
-        const hoje = new Date().toISOString().split('T')[0];
-        document.getElementById('checkin').min = hoje;
-        
-        // Atualizar data mínima do checkout quando checkin mudar
-        document.getElementById('checkin').addEventListener('change', function() {
-            const checkinDate = new Date(this.value);
-            checkinDate.setDate(checkinDate.getDate() + 1);
-            document.getElementById('checkout').min = checkinDate.toISOString().split('T')[0];
-        });
-
-        // Animação de entrada nos cards
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.quarto-card, .contato-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease-out';
-            observer.observe(el);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
